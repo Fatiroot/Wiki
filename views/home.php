@@ -65,7 +65,30 @@
     </div>
     <!-- Header End -->
     <!-- Features Start -->
-    <div class="container-fluid bg-secondary my-5">
+    <div class="container-fluid bg-secondary w-75  my-5">
+    <div class="container ">
+        <div class="row align-items-center">
+            <div class="col-lg-5">
+                <!-- Utiliser la variable $image pour afficher l'image -->
+                <img class="img-fluid w-100" src="#" alt="Wiki Image">
+            </div>
+            <div class="col-lg-7 py-5 py-lg-0">
+                <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
+                <h1 class="mb-4">title</h1>
+                <p class="mb-4">content</p>
+                <ul class="list-inline">
+                    <!-- Utiliser les variables pour afficher les détails -->
+                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>Category ID:</h6></li>
+                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>User ID:</h6></li>
+                    <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
+                </ul>
+                <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
+                <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid bg-secondary w-75 my-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
@@ -88,30 +111,7 @@
         </div>
     </div>
 </div>
-<div class="container-fluid bg-secondary my-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5">
-                <!-- Utiliser la variable $image pour afficher l'image -->
-                <img class="img-fluid w-100" src="#" alt="Wiki Image">
-            </div>
-            <div class="col-lg-7 py-5 py-lg-0">
-                <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
-                <h1 class="mb-4">title</h1>
-                <p class="mb-4">content</p>
-                <ul class="list-inline">
-                    <!-- Utiliser les variables pour afficher les détails -->
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>Category ID:</h6></li>
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>User ID:</h6></li>
-                    <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
-                </ul>
-                <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
-                <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid bg-secondary my-5">
+<div class="container-fluid bg-secondary w-75 my-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5">
