@@ -54,7 +54,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
         $categoryId = $catId;
         $categoryName = $catName;
 
-        $query = "UPDATE categories SET categoryName=? WHERE id=?";
+        $query = "UPDATE categories SET name=? WHERE id=?";
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$categoryName,$categoryId]);
 

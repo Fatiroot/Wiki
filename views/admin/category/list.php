@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 use app\dao\UserDao;
 
 session_start();
@@ -123,99 +123,36 @@ $users = $user->getUserById($Id);
             </div>
         </header>
         <!-- Main -->
-        <main class="py-6 bg-surface-secondary">
-            <div class="container-fluid">
-                <!-- Card stats -->
-                <div class="row g-6 mb-6">
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Tags</span>
-                                        <span class="h3 font-bold mb-0">$11590.90</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
-                                            <i class="bi bi-credit-card"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2 mb-0 text-sm">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Users</span>
-                                        <span class="h3 font-bold mb-0">320</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                                            <i class="bi bi-people"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2 mb-0 text-sm">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 col-12">
-                        <div class="card shadow border-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Categories</span>
-                                        <span class="h3 font-bold mb-0">4.100</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
-                                            <i class="bi bi-clock-history"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-2 mb-0 text-sm">
-                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <main class="py-6 bg-surface-secondary"> 
                 <div class="card shadow border-0 mb-7">
+                <a href="addCat" class="btn btn-sm btn-primary">
+                  <i class="bi bi-plus"></i> Add Category
+                 </a>
                     <div class="card-header">
-                        <h5 class="mb-0">Applications</h5>
+                        <h5 class="mb-0">Categories</h5>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone</th>
+                                    <th scope="col">Name</th>
                                     <th scope="col">Action</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ( $Users  as $user) { ?>
+                            <?php foreach ($Categories  as $cat) { ?>
                                 <tr>
                                     <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
-                                        <span><?= $user->username?></span>
+                                        <span><?= $cat->name?></span>
                                     </td>
-                                    <td><span><?= $user->email?></span></td>
-                                    <td><span><?= $user->phone?></span></td>
+                                  
                                     <td >
-                                        <a href="deleteUser?id=<?= $user->id ?>" class="btn btn-sm btn-neutral">Delete</a>  
+                                        <a href="updateCat?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Update</a>
+                                        <a href="deleteCat?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Delete</a>
+                                        
                                     </td>
                                 </tr>
                                 <?php } ?>
-
                             </tbody>
                         </table>
                     </div>

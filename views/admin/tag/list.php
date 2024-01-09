@@ -1,4 +1,25 @@
+<?php 
+require_once __DIR__ . '/../../../vendor/autoload.php';
+use app\dao\UserDao;
 
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
+    header('Location: login');
+    exit();
+}
+
+
+// var_dump($_SESSION['role_id']);
+
+
+
+$user = new UserDao();
+$Id = $_SESSION['user_id'];
+$users = $user->getUserById($Id);
+// print_r($user);
+
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -37,12 +58,13 @@
                             <span class="avatar-child avatar-badge bg-success"></span>
                         </div>
                     </a>
+                    <span ><?= $users['username'];?></span>
                     <!-- Menu -->
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="sidebarAvatar">
                         <a href="#" class="dropdown-item">Profile</a>
                         <a href="#" class="dropdown-item">Settings</a>
                         <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">Logout</a>
+                        <a href="login" class="dropdown-item">Logout</a>
                     </div>
                 </div>
             </div>
@@ -51,7 +73,7 @@
                 <!-- Navigation -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="dashboard">
                             <i class="bi bi-house"></i> Dashboard
                         </a>
                     </li>
@@ -61,12 +83,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="wiki">
                             <i class="bi bi-globe-americas"></i> Wikis
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="tag">
                             <i class="bi bi-file-text"></i> Tags
                         </a>
                     </li>
@@ -81,7 +103,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="return confirm('Are you sure you want to logout?')">
+                        <a class="nav-link" href="login" onclick="return confirm('Are you sure you want to logout?')">
                             <i class="bi bi-box-arrow-left"></i> Logout
                         </a>
                     </li>
@@ -103,11 +125,11 @@
         <!-- Main -->
         <main class="py-6 bg-surface-secondary"> 
                 <div class="card shadow border-0 mb-7">
-                <a href="addCat" class="btn btn-sm btn-primary">
-                  <i class="bi bi-plus"></i> Add Category
+                <a href="addTag" class="btn btn-sm btn-primary">
+                  <i class="bi bi-plus"></i> Add Tag
                  </a>
                     <div class="card-header">
-                        <h5 class="mb-0">Categories</h5>
+                        <h5 class="mb-0">Tags</h5>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-nowrap">
@@ -118,15 +140,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($Categories  as $cat) { ?>
+                            <?php foreach ($tags  as $tag) { ?>
                                 <tr>
                                     <td>
-                                        <span><?= $cat->name?></span>
+                                        <span><?= $tag->name?></span>
                                     </td>
                                   
                                     <td >
-                                        <a href="update?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Update</a>
-                                        <a href="delete?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Delete</a>
+                                        <a href="updateTag?id=<?= $tag->id ?>" class="btn btn-sm btn-neutral">Update</a>
+                                        <a href="deleteTag?id=<?= $tag->id ?>" class="btn btn-sm btn-neutral">Delete</a>
                                         
                                     </td>
                                 </tr>

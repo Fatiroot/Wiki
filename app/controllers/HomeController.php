@@ -7,7 +7,13 @@ class HomeController{
         include __DIR__ . '../../../views/home.php';
     }
     public function addCat(){
-        include __DIR__ . '../../../views/admin/addCat.php';
+        include __DIR__ . '../../../views/admin/category/add.php';
+    }
+    public function addTag(){
+        include __DIR__ . '../../../views/admin/tag/add.php';
+    }
+    public function updateCat(){
+        include __DIR__ . '../../../views/admin/category/update.php';
     }
 
 

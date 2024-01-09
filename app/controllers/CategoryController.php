@@ -27,7 +27,7 @@ class CategoryController{
     public function getAllCategories() {
         $category= new CategoryDao();
         $Categories = $category->getCategories();
-        include __DIR__ . '../../../views/admin/category.php';
+        include __DIR__ . '../../../views/admin/category/list.php';
 
     }
     public function deleteCateg(){
@@ -41,6 +41,31 @@ class CategoryController{
             
     }
     }
+    // public function updateCateg(){
+    //     if (isset($_POST["updatecategory"])){
+    //         $catName = $_POST ['categoryName'];
+    //         $category = new Category($catName);
+    //         $catdao = new CategoryDao();
+    //         $result = $catdao->updateCategory( $category,$catName);
+    //             header('location: category');
+
+
+    //     }
+
+    // }
+    public function updateCateg(){
+      if (isset($_POST["updatecategory"])){
+        $postData = $_POST ;
+        $catId = $_GET['id'];
+        $catName = $postData['categoryName'];
+
+        $cat = new CategoryDao();
+
+        $result = $cat->updateCategory($catId,$catName);
+            header('location: category');
+        
+    } }
+    
 
 
 }

@@ -11,10 +11,22 @@ $router->setRoutes([
         'login'=>['AuthController' , 'signin'],
         'login'=>['AuthController' , 'signin'],
         'register'=>['AuthController' , 'signup'],
-        'dashboard'=>['AuthController' , 'dashboard'],
+        // 'dashboard'=>['AuthController' , 'dashboard'],
         'category'=>['CategoryController' , 'getAllCategories'],
-        'delete'=>['CategoryController' , 'deleteCateg'],
+        'deleteCat'=>['CategoryController' , 'deleteCateg'],
         'addCat'=>['HomeController','addCat'],
+        'addTag'=>['HomeController','addTag'],
+        'updateCat'=>['HomeController','updateCat'],
+        'tag'=>['TagController' , 'getAllTags'],
+        'deleteTag'=>['TagController' , 'deleteTag'],
+        'dashboard'=>['UserController' , 'getAllUsers'],
+        'deleteUser'=>['UserController' , 'deleteUser'],
+
+
+
+
+
+
 
         
         
@@ -25,6 +37,10 @@ $router->setRoutes([
         'register'=>['UserController' , 'register'],
         'login'=>['UserController' , 'login'],
         'addCat'=>['CategoryController','addCategory'],
+        'updateCat'=>['CategoryController','updateCateg'],
+        'addTag'=>['TagController','addTag'],
+
+
         
         
         

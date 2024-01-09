@@ -50,10 +50,10 @@ class UserDao
     public function getAllUsers() {
         $query = "SELECT * FROM users";
         $stmt = $this->conn->query($query);
-        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $users = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $users;
     }
-
+   
     public function getUserById($id){
         $query = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->conn->prepare($query);

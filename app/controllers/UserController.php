@@ -39,17 +39,26 @@ class UserController{
       
     }
     public function login() {
-        if (isset($_POST['login'])){
-        $postData = $_POST ?? [];
-        $email = $postData['email'] ?? '';
-        $password = $postData['password'] ?? '';
+        session_start();
     
-        $users = new UserDao();
+        if (isset($_POST['login'])) {
+            // Recupero dei dati dal POST
+            $email = $_POST['email'] ?? '';
+            $password = $_POST['password'] ?? '';
     
-        // Get user details by email
-        $user = $users->getUserByEmail($email);
+            // Validazione dei dati
+            if (empty($email) || empty($password)) {
+                $_SESSION['login_error'] = 'Email and password are required.';
+                header('Location: login');
+                exit();
+            }
     
-        if ($user && password_verify($password, $user['password'])) {
+            $users = new UserDao();
+    
+            // Get user details by email
+            $user = $users->getUserByEmail($email);
+    
+            if ($user && password_verify($password, $user['password'])) {
                 // Set session variables
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
@@ -62,19 +71,18 @@ class UserController{
                 if ($role === 1) {
                     header('Location: dashboard');
                     exit();
-                } else if ($role === 2 ) {
+                } else if ($role === 2) {
                     header('Location: home');
                     exit();
-    
-                } 
+                }
             } else {
-                session_start();
-                $_SESSION['login_error'] = 'Invalid credentials. Please try again.';
+                $_SESSION['login_error'] = 'Invalid email or password. Please try again.';
                 header('Location: login');
                 exit();
             }
         }
     }
+    
 
     public function logout() {
        
@@ -89,6 +97,22 @@ class UserController{
         exit();
     
 }
- 
+public function getAllUsers() {
+    $user= new UserDao();
+    $Users = $user->getAllUsers();
+    include __DIR__ . '../../../views/admin/dashboard.php';
+
+}
+
+public function deleteUser(){
+    if(isset($_GET['id'])){
+        $userId = $_GET['id'];
+       
+        $userdao = new UserDao();
+         $userdao-> deleteUser($userId);
+        header('location: dashboard');
+        
+}
+} 
 
 }
