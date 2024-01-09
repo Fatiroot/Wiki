@@ -12,12 +12,19 @@ $router->setRoutes([
         'login'=>['AuthController' , 'signin'],
         'register'=>['AuthController' , 'signup'],
         'dashboard'=>['AuthController' , 'dashboard'],
+        'category'=>['CategoryController' , 'getAllCategories'],
+        'delete'=>['CategoryController' , 'deleteCateg'],
+        'addCat'=>['HomeController','addCat'],
+
+        
+        
         
         
     ],
     'POST'=>[
         'register'=>['UserController' , 'register'],
         'login'=>['UserController' , 'login'],
+        'addCat'=>['CategoryController','addCategory'],
         
         
         
