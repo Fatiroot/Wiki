@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\entities;
+namespace App\Models;
 
 
 class Wiki {

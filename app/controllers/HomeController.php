@@ -12,9 +12,7 @@ class HomeController{
     public function addTag(){
         include __DIR__ . '../../../views/admin/tag/add.php';
     }
-    public function updateCat(){
-        include __DIR__ . '../../../views/admin/category/update.php';
-    }
+    
 
 
    

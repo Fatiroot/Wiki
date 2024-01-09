@@ -136,7 +136,7 @@ $users = $user->getUserById($Id);
                     <i class="bi bi-plus"></i> Add Category
                     </button>
                 </form>
-               </div>>
+               </div>
             </div>
         </main>
     </div>

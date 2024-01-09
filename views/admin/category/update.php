@@ -126,17 +126,18 @@ $users = $user->getUserById($Id);
         <main class="py-6 bg-surface-secondary"> 
             <div class="card shadow border-0 mb-7">
                <div class="container mt-5">
-                <h2>Updqte Category</h2>
+                <h2>Update Category</h2>
                 <form method="post" action="updateCat">
                     <div class="mb-3">
-                    <input type="text" class="form-control" id="categoryId" name="categoryId" hidden required>
-                    <label for="categoryName" class="form-label">Category Name</label>
-                    <input type="text" class="form-control" id="categoryName" name="categoryName" required>
+                        <input type="hidden" class="form-control" id="categoryId" name="id" required>
+                        <label for="categoryName" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="categoryName" name="categoryName" value="" required>
                     </div>
-                    <button name="updatecategory" class="btn btn-primary">
-                     Update Category
+                    <button  name="updatecategory" class="btn btn-primary">
+                        Update Category
                     </button>
                 </form>
+
                </div>
             </div>
         </main>

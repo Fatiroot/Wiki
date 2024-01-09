@@ -16,22 +16,12 @@ $router->setRoutes([
         'deleteCat'=>['CategoryController' , 'deleteCateg'],
         'addCat'=>['HomeController','addCat'],
         'addTag'=>['HomeController','addTag'],
-        'updateCat'=>['HomeController','updateCat'],
+        'updateCat'=>['CategoryController','getCat'],
         'tag'=>['TagController' , 'getAllTags'],
         'deleteTag'=>['TagController' , 'deleteTag'],
         'dashboard'=>['UserController' , 'getAllUsers'],
         'deleteUser'=>['UserController' , 'deleteUser'],
 
-
-
-
-
-
-
-        
-        
-        
-        
     ],
     'POST'=>[
         'register'=>['UserController' , 'register'],
@@ -39,11 +29,7 @@ $router->setRoutes([
         'addCat'=>['CategoryController','addCategory'],
         'updateCat'=>['CategoryController','updateCateg'],
         'addTag'=>['TagController','addTag'],
-
-
-        
-        
-        
+ 
     ]
     
 ]);

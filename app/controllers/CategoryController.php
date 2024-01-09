@@ -41,23 +41,21 @@ class CategoryController{
             
     }
     }
-    // public function updateCateg(){
-    //     if (isset($_POST["updatecategory"])){
-    //         $catName = $_POST ['categoryName'];
-    //         $category = new Category($catName);
-    //         $catdao = new CategoryDao();
-    //         $result = $catdao->updateCategory( $category,$catName);
-    //             header('location: category');
-
-
-    //     }
+    public function getCat()
+    {
+        $id = $_GET['id'];
+        $category = new CategoryDao();
+        $cats = $category->getCategories();
+        $oneCategory = $category->getCategoryById($id);
+        require_once '../../views/admin/category/update.php';
+    }
 
     // }
     public function updateCateg(){
-      if (isset($_POST["updatecategory"])){
+        if(isset($_POST['updatecategory'])){
         $postData = $_POST ;
-        $catId = $_GET['id'];
         $catName = $postData['categoryName'];
+        $catId = $postData['id'];
 
         $cat = new CategoryDao();
 
