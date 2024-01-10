@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
-session_start();
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     header('Location: login');
     exit();
 }
+// var_dump($_SESSION['user_id']);
+// exit();
 ?>
 
 <!DOCTYPE html>
@@ -75,75 +76,34 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 
     <!-- Header End -->
     <!-- Features Start -->
+    <?php foreach ($wikis  as $wiki) { ?>
     <div class="container-fluid bg-secondary w-75  my-5">
     <div class="container ">
         <div class="row align-items-center">
             <div class="col-lg-5">
                 <!-- Utiliser la variable $image pour afficher l'image -->
-                <img class="img-fluid w-100" src="#" alt="Wiki Image">
+                <img class="img-fluid w-100" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
             </div>
             <div class="col-lg-7 py-5 py-lg-0">
                 <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
-                <h1 class="mb-4">title</h1>
-                <p class="mb-4">content</p>
+                <h1 class="mb-4"><?= $wiki['title'] ?></h1>
+                <p class="mb-4"><?= $wiki['centent'] ?></p>
                 <ul class="list-inline">
                     <!-- Utiliser les variables pour afficher les détails -->
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>Category ID:</h6></li>
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>User ID:</h6></li>
+                    <li><h6><?= $wiki['name'] ?></h6></li>
+                    <li><h6></i><?= $wiki['username'] ?></h6></li>
+                    <span class="date"><?php echo $wiki['creation_date']; ?></span>
                     <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
                 </ul>
                 <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
                 <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
+                <a href="deletewiki?id=<?=$wiki['id']?>" class="btn btn-primary mt-3 py-2 px-4">delete</a>
+
             </div>
         </div>
     </div>
 </div>
-<div class="container-fluid bg-secondary w-75 my-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5">
-                <!-- Utiliser la variable $image pour afficher l'image -->
-                <img class="img-fluid w-100" src="#" alt="Wiki Image">
-            </div>
-            <div class="col-lg-7 py-5 py-lg-0">
-                <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
-                <h1 class="mb-4">title</h1>
-                <p class="mb-4">content</p>
-                <ul class="list-inline">
-                    <!-- Utiliser les variables pour afficher les détails -->
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>Category ID:</h6></li>
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>User ID:</h6></li>
-                    <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
-                </ul>
-                <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
-                <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid bg-secondary w-75 my-5">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-5">
-                <!-- Utiliser la variable $image pour afficher l'image -->
-                <img class="img-fluid w-100" src="#" alt="Wiki Image">
-            </div>
-            <div class="col-lg-7 py-5 py-lg-0">
-                <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
-                <h1 class="mb-4">title</h1>
-                <p class="mb-4">content</p>
-                <ul class="list-inline">
-                    <!-- Utiliser les variables pour afficher les détails -->
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>Category ID:</h6></li>
-                    <li><h6><i class="far fa-dot-circle text-primary mr-3"></i>User ID:</h6></li>
-                    <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
-                </ul>
-                <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
-                <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
+<?php } ?>
 
     <!-- Features End -->
 

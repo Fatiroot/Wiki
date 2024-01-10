@@ -7,7 +7,7 @@ $router->setRoutes([
     'GET'=>[
         ''=>['HomeController' , 'index'],
         'home'=>['HomeController' , 'index'],
-        'homeauthor'=>['HomeController','homeauthor'],
+        'homeauthor'=>['WikiController','getAllWikis'],
         'register'=> ['AuthController', 'signup'],
         'login'=>['AuthController' , 'signin'],
         'login'=>['AuthController' , 'signin'],
@@ -23,6 +23,8 @@ $router->setRoutes([
         'dashboard'=>['UserController' , 'getAllUsers'],
         'deleteUser'=>['UserController' , 'deleteUser'],
         'addwiki'=>['HomeController','addwiki'],
+        'deletewiki'=>['WikiController' , 'deletewiki'],
+        
 
 
     ],

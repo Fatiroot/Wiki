@@ -14,9 +14,9 @@ public function index(){
     public function addTag(){
         include __DIR__ . '../../../views/admin/tag/add.php';
     }
-    public function homeauthor(){
-        include __DIR__ . '../../../views/author/home.php';
-    }
+    // public function homeauthor(){
+    //     include __DIR__ . '../../../views/author/home.php';
+    // }
     public function addwiki(){
         $category= new CategoryDao();
         $Categories = $category->getCategories();

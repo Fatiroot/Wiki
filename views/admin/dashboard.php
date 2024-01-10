@@ -205,7 +205,6 @@ $users = $user->getUserById($Id);
                             <?php foreach ( $Users  as $user) { ?>
                                 <tr>
                                     <td>
-                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2">
                                         <span><?= $user->username?></span>
                                     </td>
                                     <td><span><?= $user->email?></span></td>

@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     </div>
     <div class="mb-3">
         <label for="tag" class="form-label">Tag:</label>
-        <select id="tag" name="tag_id" >
+        <select id="tag" name="tag_id[]" multiple>
             <?php foreach ($tags as $tag) { ?>
                 <option value="<?= $tag['id'] ?>" ><?= $tag['name'] ?></option>
             <?php } ?>
