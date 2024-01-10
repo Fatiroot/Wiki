@@ -7,6 +7,7 @@ $router->setRoutes([
     'GET'=>[
         ''=>['HomeController' , 'index'],
         'home'=>['HomeController' , 'index'],
+        'homeauthor'=>['HomeController','homeauthor'],
         'register'=> ['AuthController', 'signup'],
         'login'=>['AuthController' , 'signin'],
         'login'=>['AuthController' , 'signin'],
@@ -21,6 +22,8 @@ $router->setRoutes([
         'deleteTag'=>['TagController' , 'deleteTag'],
         'dashboard'=>['UserController' , 'getAllUsers'],
         'deleteUser'=>['UserController' , 'deleteUser'],
+        'addwiki'=>['HomeController','addwiki'],
+
 
     ],
     'POST'=>[
@@ -29,6 +32,9 @@ $router->setRoutes([
         'addCat'=>['CategoryController','addCategory'],
         'updateCat'=>['CategoryController','updateCateg'],
         'addTag'=>['TagController','addTag'],
+        'addwiki'=>['WikiController','addwiki'],
+
+        
  
     ]
     

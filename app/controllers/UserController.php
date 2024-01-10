@@ -72,7 +72,7 @@ class UserController{
                     header('Location: dashboard');
                     exit();
                 } else if ($role === 2) {
-                    header('Location: home');
+                    header('Location: homeauthor');
                     exit();
                 }
             } else {

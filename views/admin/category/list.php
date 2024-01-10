@@ -143,12 +143,12 @@ $users = $user->getUserById($Id);
                             <?php foreach ($Categories  as $cat) { ?>
                                 <tr>
                                     <td>
-                                        <span><?= $cat->name?></span>
+                                        <span><?= $cat['name']?></span>
                                     </td>
                                   
                                     <td >
-                                        <a href="updateCat?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Update</a>
-                                        <a href="deleteCat?id=<?= $cat->id ?>" class="btn btn-sm btn-neutral">Delete</a>
+                                        <a href="updateCat?id=<?= $cat['id'] ?>" class="btn btn-sm btn-neutral">Update</a>
+                                        <a href="deleteCat?id=<?= $cat['id'] ?>" class="btn btn-sm btn-neutral">Delete</a>
                                         
                                     </td>
                                 </tr>

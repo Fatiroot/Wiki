@@ -12,6 +12,7 @@ class Wiki {
     private $categorie_id;
     private $image;
     private $user_id;
+    private $tags=[];
 
     public function __construct($image, $title, $content ,$creation_date, $statut, $categorie_id, $user_id) {
         $this->image = $image;

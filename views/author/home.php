@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__ . '/../../vendor/autoload.php';
+session_start();
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
+    header('Location: login');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +19,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -37,9 +48,9 @@
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
                     <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="login" class="nav-item nav-link">add wiki</a>
+                    <a href="displywiki" class="nav-item nav-link">My wiki</a>
                     <a href="#" class="nav-item nav-link">Service</a>
-                    <a href="register" class="nav-item nav-link">get started</a>
+                    <a href="home" class="nav-item nav-link">log out</a>
                 </div>
             </div>
         </nav>
@@ -51,16 +62,17 @@
     <div class="jumbotron jumbotron-fluid mb-5">
         <div class="container text-center py-5">
             <h1 class="text-primary mb-4">Wiki</h1>
-            <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Enter">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-3">Recher</button>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <a href="addwiki" class="btn btn-primary px-5 py-3 mb-3">
+                  <i class="bi bi-plus"></i> Add Wiki
+                 </a>
             </div>
+            <input type="text" class="form-control border-light mb-3" style="padding: 30px;" placeholder="rechercher ...">
+
         </div>
     </div>
+
+
     <!-- Header End -->
     <!-- Features Start -->
     <div class="container-fluid bg-secondary w-75  my-5">

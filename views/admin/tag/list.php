@@ -143,12 +143,12 @@ $users = $user->getUserById($Id);
                             <?php foreach ($tags  as $tag) { ?>
                                 <tr>
                                     <td>
-                                        <span><?= $tag->name?></span>
+                                        <span><?= $tag['name']?></span>
                                     </td>
                                   
                                     <td >
-                                        <a href="updateTag?id=<?= $tag->id ?>" class="btn btn-sm btn-neutral">Update</a>
-                                        <a href="deleteTag?id=<?= $tag->id ?>" class="btn btn-sm btn-neutral">Delete</a>
+                                        <a href="updateTag?id=<?= $tag['id'] ?>" class="btn btn-sm btn-neutral">Update</a>
+                                        <a href="deleteTag?id=<?= $tag['id'] ?>" class="btn btn-sm btn-neutral">Delete</a>
                                         
                                     </td>
                                 </tr>

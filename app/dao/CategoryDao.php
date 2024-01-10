@@ -17,7 +17,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     {
         $stmt = $this->conn->prepare("SELECT * from  categories");
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 

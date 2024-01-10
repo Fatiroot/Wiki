@@ -26,15 +26,22 @@ require_once __DIR__ . '/../../vendor/autoload.php';
         return $row;
     }
 
-    public function insertTagsForWiki($wikiId, $tags)
-    {
-        $sqlTagWiki = "INSERT INTO `tag_wiki` (`tag_id`, `wiki_id`) VALUES (?, ?)";
-        $stmtTagWiki = $this->conn->prepare($sqlTagWiki);
-    
-        foreach ($tags as $tagId) {
-            $stmtTagWiki->execute([$tagId, $wikiId]);
-        }
-    }
+    //  public function addWiki($image, $title, $content, $statut, $categoryId, $userId)
+    //     {
+    //         $sql = "INSERT INTO `wikis` (`image`, `title`, `content`, `creation_date`, `statut`, `category_id`, `user_id`)  
+    //                 VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?, ?, ?)";
+
+    //         $stmt = $this->conn->prepare($sql);
+    //         $reuslt= $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId]);
+
+    //         $lastInsertedId = $this->conn->lastInsertId();
+    //         if($reuslt){
+    //         $sqlTagWiki = "INSERT INTO `tag_wiki` (`wiki_id`) VALUES (?)";
+    //         $stmtTagWiki = $this->conn->prepare($sqlTagWiki);
+    //         $stmtTagWiki->execute([$lastInsertedId]);
+    //     }
+    // }
+
 
     public function addWiki($image,$title, $content, $statut, $categoryId, $userId, $tags)
 {
@@ -49,8 +56,12 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
         $lastInsertedId = $this->conn->lastInsertId();
 
-        $this->insertTagsForWiki($lastInsertedId, $tags);
-
+        $sqlTagWiki = "INSERT INTO `tag_wiki` (`tag_id`, `wiki_id`) VALUES (?, ?)";
+        $stmtTagWiki = $this->conn->prepare($sqlTagWiki);
+    
+        foreach ($tags as $tagId) {
+            $stmtTagWiki->execute([$lastInsertedId, $tagId]);
+        }
         $this->conn->commit();
 
     } catch (\PDOException $e) {
@@ -59,13 +70,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     }
 }
   
-public function deleteTagsForWiki($wikiId)
-{
-    $query = "DELETE FROM `tag_wiki` WHERE `wiki_id` = ?";
-    $stm = $this->conn->prepare($query);
-    $stm->execute([$wikiId]);
-}
-
 public  function deleteWiki($wikiId)
 {
     try {
@@ -75,7 +79,9 @@ public  function deleteWiki($wikiId)
         $stm = $this->conn->prepare($query);
         $stm->execute([$wikiId]);
 
-        self::deleteTagsForWiki($wikiId);
+        $query = "DELETE FROM `tag_wiki` WHERE `wiki_id` = ?";
+        $stm = $this->conn->prepare($query);
+        $stm->execute([$wikiId]);
 
         $this->conn->commit();
 
@@ -84,28 +90,26 @@ public  function deleteWiki($wikiId)
         echo "Error : " . $e->getMessage();
     } 
 }
-public function editWiki($wikiId, $image, $title, $content, $statut, $categoryId, $userId, $tags)
-{
-    try {
-        $this->conn->beginTransaction();
+// public function updateWiki($wikiId, $image, $title, $content, $statut, $categoryId, $userId, $tags)
+// {
+//     try {
+//         $this->conn->beginTransaction();
 
-        $sql = "UPDATE `wikis` 
-                SET `image` = ?, `title` = ?, `content` = ?, `statut` = ?,  `category_id` = ?, `user_id` = ? 
-                WHERE `id` = ?";
+//         $sql = "UPDATE `wikis` 
+//                 SET `image` = ?, `title` = ?, `content` = ?, `statut` = ?,  `category_id` = ?, `user_id` = ? 
+//                 WHERE `id` = ?";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId, $wikiId]);
+//         $stmt = $this->conn->prepare($sql);
+//         $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId, $wikiId]);
 
-        $this->deleteTagsForWiki($wikiId);
+        
 
-        $this->insertTagsForWiki($wikiId, $tags);
+//         $this->conn->commit();
 
-        $this->conn->commit();
-
-    } catch (\PDOException $e) {
-        $this->conn->rollBack();
-        echo "Error : " . $e->getMessage();
-    } 
+//     } catch (\PDOException $e) {
+//         $this->conn->rollBack();
+//         echo "Error : " . $e->getMessage();
+//     } 
     
-}
+// }
 }
