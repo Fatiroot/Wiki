@@ -16,6 +16,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add wiki</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
     <script src="https://cdn.tiny.cloud/1/k5wu5iubgom98npjv1612l28685z6zxa8348t42bnvfq28w2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
@@ -50,7 +51,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     </div>
     <div class="mb-3">
         <label for="tag" class="form-label">Tag:</label>
-        <select id="tag" name="tag_id[]" multiple>
+        <select id="tag" name="tag_id[]" multiple style="padding-inline: 10px;">
             <?php foreach ($tags as $tag) { ?>
                 <option value="<?= $tag['id'] ?>" ><?= $tag['name'] ?></option>
             <?php } ?>

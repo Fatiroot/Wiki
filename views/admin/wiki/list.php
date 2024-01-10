@@ -135,7 +135,6 @@ $users = $user->getUserById($Id);
                                 <tr>
                                     <th scope="col">image</th>
                                     <th scope="col">title</th>
-                                    <th scope="col">content</th>
                                     <th scope="col">creation date</th>
                                     <th scope="col">statut</th>
                                     <th scope="col">category name</th>
@@ -152,9 +151,7 @@ $users = $user->getUserById($Id);
                                     <td>
                                         <span><?= $wiki['title']?></span>
                                     </td>
-                                    <td>
-                                        <span><?= $wiki['centent']?></span>
-                                    </td>
+                                    
                                     <td>
                                         <span><?= $wiki['name']?></span>
                                     </td>
@@ -164,7 +161,9 @@ $users = $user->getUserById($Id);
                                     <td>
                                         <span><?= $wiki['name']?></span>
                                     </td>
+                                    
                                     <td>
+
                                         <span><?= $wiki['username']?></span>
                                     </td>
                                     <td >

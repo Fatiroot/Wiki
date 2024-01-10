@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     public function getWikis()
     {
         // $stmt = $this->conn->prepare("SELECT * from  wikis");
-        $stmt = $this->conn->prepare(" SELECT w.*, u.username, c.name 
+        $stmt = $this->conn->prepare(" SELECT w.*,u.id, u.username, c.name 
         FROM wikis AS w 
         INNER JOIN users AS u ON (u.id = w.user_id) 
         INNER JOIN categories AS c ON (c.id = w.categorie_id) ");
@@ -25,7 +25,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
     
     public function getWikisById($id){
-        $stmt = $this->conn->prepare("SELECT w.* FROM wikis AS w INNER JOIN users AS u ON w.user_id = u.id WHERE u.id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM wikis where id = ?");
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;

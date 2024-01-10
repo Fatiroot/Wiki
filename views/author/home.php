@@ -76,7 +76,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 
     <!-- Header End -->
     <!-- Features Start -->
-    <?php foreach ($wikis  as $wiki) { ?>
+    <?php foreach ($wikis  as $wiki) { 
+        if($_SESSION['user_id']===$wiki['id']){?>
     <div class="container-fluid bg-secondary w-75  my-5">
     <div class="container ">
         <div class="row align-items-center">
@@ -103,7 +104,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
         </div>
     </div>
 </div>
-<?php } ?>
+<?php }} ?>
 
     <!-- Features End -->
 

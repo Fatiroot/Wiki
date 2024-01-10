@@ -65,11 +65,9 @@ class WikiController
 
     public function getwiki()
     {
-        $id=$_SESSION['user_id'];
         $idwiki=$_GET['id'];
-
         $wikidao = new Wikidao();
-        $wiki = $wikidao->getWikisById($id);
+        $wiki = $wikidao->getWikisById($idwiki);
         header('location: homeauthor');
 
     }
