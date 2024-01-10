@@ -3,6 +3,7 @@ namespace app\controllers;
 require_once __DIR__ . '/../../vendor/autoload.php';
 use app\dao\CategoryDao;
 use app\dao\TagDao;
+use app\dao\WikiDao;
 
 class HomeController{
 public function index(){
@@ -14,9 +15,11 @@ public function index(){
     public function addTag(){
         include __DIR__ . '../../../views/admin/tag/add.php';
     }
-    // public function homeauthor(){
-    //     include __DIR__ . '../../../views/author/home.php';
-    // }
+    public function wiki(){
+        $wikidao = new Wikidao();
+        $wikis= $wikidao->getWikis();
+        include __DIR__ . '../../../views/admin/wiki/list.php';
+    }
     public function addwiki(){
         $category= new CategoryDao();
         $Categories = $category->getCategories();

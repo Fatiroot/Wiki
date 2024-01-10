@@ -7,6 +7,7 @@ $router->setRoutes([
     'GET'=>[
         ''=>['HomeController' , 'index'],
         'home'=>['HomeController' , 'index'],
+        'wiki'=>['HomeController' , 'wiki'],
         'homeauthor'=>['WikiController','getAllWikis'],
         'register'=> ['AuthController', 'signup'],
         'login'=>['AuthController' , 'signin'],
