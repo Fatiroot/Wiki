@@ -25,7 +25,7 @@ $users = $user->getUserById($Id);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Bootstrap Dashboard and Admin Template - ByteWebster</title>
+  <title>dashboard</title>
   <link rel="stylesheet" href="/wiki/app/routes/../../public/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../vendor/autoload.php';
-
+ session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     header('Location: login');
     exit();
@@ -8,19 +8,17 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 // var_dump($_SESSION['user_id']);
 // exit();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>FASTER - Logistics Company Website Template</title>
+    <title>home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -33,7 +31,67 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
     <link href="/wiki/app/routes/../../public/css/home.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .wiki-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .wiki-image {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        .wiki-content {
+            padding: 20px;
+        }
+
+        .wiki-title {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .wiki-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .wiki-details {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wiki-details li {
+            display: inline-block;
+            margin-right: 15px;
+            color: #6c757d;
+        }
+
+        .wiki-details .date {
+            margin-left: 15px;
+        }
+
+
+    </style>
 </head>
 
 <body>
@@ -48,10 +106,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="displywiki" class="nav-item nav-link">My wiki</a>
-                    <a href="#" class="nav-item nav-link">Service</a>
-                    <a href="home" class="nav-item nav-link">log out</a>
+                    <a href="home" class="nav-item nav-link active">Home</a>
+                    <a href="homeauthor" class="nav-item nav-link">my wikis</a>
+                    <a href="index" class="nav-item nav-link">log out</a>
                 </div>
             </div>
         </nav>
@@ -63,50 +120,68 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     <div class="jumbotron jumbotron-fluid mb-5">
         <div class="container text-center py-5">
             <h1 class="text-primary mb-4">Wiki</h1>
-            <div class="d-flex justify-content-center align-items-center flex-column">
-                <a href="addwiki" class="btn btn-primary px-5 py-3 mb-3">
-                  <i class="bi bi-plus"></i> Add Wiki
-                 </a>
+            <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                <div class="input-group">
+                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Enter">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary px-3">Recher</button>
+                    </div>
+                </div>
             </div>
-            <input type="text" class="form-control border-light mb-3" style="padding: 30px;" placeholder="rechercher ...">
-
         </div>
     </div>
-
-
     <!-- Header End -->
-    <!-- Features Start -->
-    <?php foreach ($wikis  as $wiki) { 
-        if($_SESSION['user_id']===$wiki['user_id'] && $wiki['statut']===0 ){?>
-    <div class="container-fluid bg-secondary w-75  my-5">
-    <div class="container ">
-        <div class="row align-items-center">
-            <div class="col-lg-5">
-                <!-- Utiliser la variable $image pour afficher l'image -->
-                <img class="img-fluid w-100" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
-            </div>
-            <div class="col-lg-7 py-5 py-lg-0">
-                <!-- Utiliser les variables PHP pour afficher les données du Wiki -->
-                <h1 class="mb-4"><?= $wiki['title'] ?></h1>
-                <p class="mb-4"><?= $wiki['centent'] ?></p>
-                <ul class="list-inline">
-                    <!-- Utiliser les variables pour afficher les détails -->
-                    <li><h6><?= $wiki['name'] ?></h6></li>
-                    <li><h6></i><?= $wiki['username'] ?></h6></li>
-                    <span class="date"><?php echo $wiki['creation_date']; ?></span>
-                    <!-- Vous pouvez ajouter plus de détails ici si nécessaire -->
-                </ul>
-                <!-- Vous pouvez ajouter des liens ou des boutons pour des actions supplémentaires -->
-                <a href="" class="btn btn-primary mt-3 py-2 px-4">Learn More</a>
-                <a href="deletewiki?id=<?=$wiki['id']?>" class="btn btn-primary mt-3 py-2 px-4">delete</a>
-
+   <!-- Features Start -->
+<h3 class="text-center">Last Wikis</h3>
+<?php foreach ($wikis as $wiki) { 
+    if ($wiki['statut'] === 0) { ?>
+        <div class="container wiki-container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img class="img-fluid wiki-image" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
+                </div>
+                <div class="col-lg-7">
+                    <div class="wiki-content">
+                        <h1 class="wiki-title"><?= $wiki['title'] ?></h1>
+                        <ul class="wiki-details">
+                            <li><h6><?= $wiki['name'] ?></h6></li>
+                            <li><h6><?= $wiki['username'] ?></h6></li>
+                            <li class="date"><?= $wiki['creation_date']; ?></li>
+                        </ul>
+                        <a href="home?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">Learn More</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+         <!-- Modal for each wiki -->
+         <div class="modal fade" id="viewContent<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Content</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?= $wiki['centent'] ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 <?php }} ?>
+<h3 class="text-center mt-5">Last Categories</h3>
 
-    <!-- Features End -->
+<?php foreach ($categories as $cat) { ?>
+    <div class="container my-3">
+        <div class="alert alert-info" role="alert">
+            <?php echo $cat['name']; ?>
+        </div>
+    </div>
+<?php } ?>
+<!-- Features End -->
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use app\dao\UserDao;
 
-session_start();
+
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
     header('Location: login');
@@ -14,9 +14,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 1) {
 
 
 
-$user = new UserDao();
-$Id = $_SESSION['user_id'];
-$users = $user->getUserById($Id);
 // print_r($user);
 
 ?>
@@ -25,7 +22,7 @@ $users = $user->getUserById($Id);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Bootstrap Dashboard and Admin Template - ByteWebster</title>
+  <title>dashboard</title>
   <link rel="stylesheet" href="/wiki/app/routes/../../public/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
@@ -132,9 +129,10 @@ $users = $user->getUserById($Id);
                     <label for="categoryName" class="form-label">Tag Name</label>
                     <input type="text" class="form-control" id="tagName" name="tagName" required>
                     </div>
-                    <button name="addtag" class="btn btn-primary">
+                    <button name="addtag" class="btn btn-primary btn-sm d-flex justify-content-center align-items-center">
                     <i class="bi bi-plus"></i> Add Tag
-                    </button>
+                 </button>
+
                 </form>
                </div>
             </div>

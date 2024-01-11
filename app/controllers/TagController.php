@@ -3,6 +3,7 @@ namespace app\controllers;
 require_once __DIR__ . '/../../vendor/autoload.php';
 use app\Models\Tag;
 use app\dao\TagDao;
+use app\dao\UserDao;
 
 class TagController{
 
@@ -28,6 +29,11 @@ class TagController{
             }
 
     public function getAllTags() {
+        session_start();
+
+        $user = new UserDao();
+        $Id = $_SESSION['user_id'];
+        $users = $user->getUserById($Id);
         $tag= new TagDao();
         $tags = $tag->getTags();
         include __DIR__ . '../../../views/admin/tag/list.php';
@@ -48,7 +54,6 @@ class TagController{
 public function updateTags(){
     $tagId=$_POST['id'];
     $tagName=$_POST['tagName'];
-
     $tag =new TagDao();
     $result= $tag->updateTag($tagId, $tagName);
     header('location: tag');

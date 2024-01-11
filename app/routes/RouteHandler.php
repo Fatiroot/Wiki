@@ -6,7 +6,8 @@ $router = new Router();
 $router->setRoutes([
     'GET'=>[
         ''=>['HomeController' , 'index'],
-        'home'=>['HomeController' , 'index'],
+        'index'=>['HomeController' , 'index'],
+        'home'=>['HomeController' , 'indexauthor'],
         'wiki'=>['HomeController' , 'wiki'],
         'homeauthor'=>['WikiController','getAllWikis'],
         'register'=> ['AuthController', 'signup'],
@@ -26,6 +27,8 @@ $router->setRoutes([
         'deleteUser'=>['UserController' , 'deleteUser'],
         'addwiki'=>['HomeController','addwiki'],
         'deletewiki'=>['WikiController' , 'deletewiki'],
+        'updatewiki'=>['HomeController','updateWiki'],
+
         
 
 
@@ -39,6 +42,8 @@ $router->setRoutes([
         'addTag'=>['TagController','addTag'],
         'addwiki'=>['WikiController','addwiki'],
         'updatestatut'=>['WikiController','updateWikiStatut'],
+        'updatewiki'=>['WikiController','updateWikis'],
+
 
         
  

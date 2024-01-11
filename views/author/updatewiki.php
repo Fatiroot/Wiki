@@ -22,21 +22,21 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 </head>
 <body>
 
-<form action="addwiki" method="post" enctype="multipart/form-data" class="mt-4">
+<form action="updateWiki" method="post" enctype="multipart/form-data" class="mt-4">
     <div class="mb-3">
-        <label for="image" class="form-label">Image:</label>
-        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        <label for="image" class="form-label" >Image:</label>
+        <input type="file" class="form-control"  value="<?=  $Wikis['image'] ?>" id="image" name="image" accept="image/*" ">
     </div>
     <div class="mb-3">
-        <label for="title" class="form-label">Title:</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+        <label for="title" class="form-label" >Title:</label>
+        <input type="text" class="form-control" value="<?=  $Wikis['title'] ?>" id="title" name="title" placeholder="Title">
     </div>
     <div class="mb-3">
-        <label for="content" class="form-label">Content:</label>
-        <textarea class="form-control" id="content" name="content" placeholder="Content"></textarea>
+        <label for="content" class="form-label" >Content:</label>
+        <textarea class="form-control" id="content" name="content" value="<?=  $Wikis['centent'] ?>" placeholder="Content"></textarea>
     </div>
     <div class="mb-3">
-        <label for="category" class="form-label">Category:</label>
+        <label for="category" class="form-label" value="<?= $wikis['categorie_id'] ?>">Category:</label>
         <select id="category" name="categorie_id" >
             <?php foreach ($Categories as $cat) { ?>
                 <option value="<?= $cat['id'] ?>" ><?= $cat['name'] ?></option>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 
     <!-- Other fields and tags inputs go here -->
     <div>
-        <button type="submit" name="add" class="btn btn-primary">Submit</button>
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
 

@@ -3,6 +3,7 @@ namespace app\controllers;
 require_once __DIR__ . '/../../vendor/autoload.php';
 use app\Models\Category;
 use app\dao\CategoryDao;
+use app\dao\UserDao;
 
 class CategoryController{
 
@@ -25,6 +26,11 @@ class CategoryController{
 
     }
     public function getAllCategories() {
+        session_start();
+
+        $user = new UserDao();
+        $Id = $_SESSION['user_id'];
+        $users = $user->getUserById($Id);
         $category= new CategoryDao();
         $Categories = $category->getCategories();
         include __DIR__ . '../../../views/admin/category/list.php';

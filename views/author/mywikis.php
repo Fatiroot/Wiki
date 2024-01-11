@@ -1,17 +1,31 @@
+<?php
+require_once __DIR__ . '/../../vendor/autoload.php';
+ session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
+    header('Location: login');
+    exit();
+}
+// var_dump($_SESSION['user_id']);
+// exit();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <titlehome</title>
+    <title>my wikis</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -21,13 +35,11 @@
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
+    <link href="/wiki/app/routes/../../public/css/home.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-    <link href="/wiki/app/routes/../../public/css/home.css" rel="stylesheet">
-    <style>
+   <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
@@ -79,6 +91,14 @@
         .wiki-details .date {
             margin-left: 15px;
         }
+
+     
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -94,10 +114,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="index" class="nav-item nav-link active">Home</a>
-                    <a href="login" class="nav-item nav-link">add wiki</a>
-                    <a href="#" class="nav-item nav-link">Service</a>
-                    <a href="register" class="nav-item nav-link">get started</a>
+                    <a href="home" class="nav-item nav-link ">Home</a>
+                    <a href="homeauthor" class="nav-item nav-link active">My wiki</a>
+                    <a href="index" class="nav-item nav-link">log out</a>
                 </div>
             </div>
         </nav>
@@ -109,25 +128,26 @@
     <div class="jumbotron jumbotron-fluid mb-5">
         <div class="container text-center py-5">
             <h1 class="text-primary mb-4">Wiki</h1>
-            <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Enter">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-3">Recher</button>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-center align-items-center flex-column">
+                <a href="addwiki" class="btn btn-primary px-5 py-3 mb-3">
+                  <i class="bi bi-plus"></i> Add Wiki
+                 </a>
             </div>
+            <input type="text" class="form-control border-light mb-3" style="padding: 30px;" placeholder="rechercher ...">
+
         </div>
     </div>
+
+
     <!-- Header End -->
-<!-- Features Start -->
+    <!-- Features Start -->
 <h3 class="text-center">Last Wikis</h3>
 <?php foreach ($wikis as $wiki) { 
-    if ($wiki['statut'] === 0) { ?>
-        <div class="container wiki-container">
+        if($_SESSION['user_id']===$wiki['user_id'] && $wiki['statut']===0 ){?>
+            <div class="container wiki-container">
             <div class="row">
                 <div class="col-lg-5">
-                    <img class="img-fluid wiki-image" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
+                    <img class="img-fluid wiki-image" value="<?= $Categories['id'] ?>"  src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
                 </div>
                 <div class="col-lg-7">
                     <div class="wiki-content">
@@ -137,13 +157,15 @@
                             <li><h6><?= $wiki['username'] ?></h6></li>
                             <li class="date"><?= $wiki['creation_date']; ?></li>
                         </ul>
-                        <a href="index?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">Learn More</a>
+                        <a href="homeauthor?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">Learn More</a>
+                        <a href="deletewiki?id=<?=$wiki['id']?>" class="btn btn-danger mt-3 ml-2">Delete</a>
+                        <a href="updatewiki?id=<?=$wiki['id']?>" class="btn btn-danger mt-3 ml-2">Update</a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Modal for each wiki -->
-    <div class="modal fade" id="viewContent<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <!-- Modal for each wiki -->
+         <div class="modal fade" id="viewContent<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -160,21 +182,9 @@
             </div>
         </div>
 <?php }} ?>
-<h3 class="text-center mt-5">Last Categories</h3>
-
-<?php foreach ($categories as $cat) { ?>
-    <div class="container my-3">
-        <div class="alert alert-info" role="alert">
-            <?php echo $cat['name']; ?>
-        </div>
-    </div>
-    
-<?php } ?>
+<
 <!-- Features End -->
 
-<script src="path/to/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<script src="path/to/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
         <div class="row pt-5">

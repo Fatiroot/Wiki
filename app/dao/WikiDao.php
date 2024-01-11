@@ -98,6 +98,7 @@ public function updateWiki($id, $image, $title, $content, $statut, $categoryId, 
 
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId, $id]);
+
         $query = "DELETE FROM `tag_wiki` WHERE `wiki_id` = ?";
         $stm = $this->conn->prepare($query);
         $stm->execute([$id]);
@@ -108,8 +109,7 @@ public function updateWiki($id, $image, $title, $content, $statut, $categoryId, 
         foreach ($tags as $tagId) {
             $resultTag = $stmtTagWiki->execute([$tagId, $id]);
             if (!$resultTag) {
-                // Log or handle tag insertion failure
-                error_log("Tag insertion failed for tag ID: $tagId");
+                error_log("error");
             }
         }
 
@@ -138,6 +138,19 @@ public function countWikis() {
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     
     return $data['wiki_count'];
+}
+
+
+public function getlastWikis()
+{
+    $stmt = $this->conn->prepare(" SELECT w.*,w.id, u.username, c.name 
+    FROM wikis AS w 
+    INNER JOIN users AS u ON (u.id = w.user_id) 
+    INNER JOIN categories AS c ON (c.id = w.categorie_id)  ORDER BY w.id DESC LIMIT 3 ") ;
+
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 
 }

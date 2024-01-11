@@ -3,6 +3,7 @@ namespace app\dao;
 require_once __DIR__ . '/../../vendor/autoload.php';
  use app\Models\Category;
  use app\Database\Database;
+
  use PDO;
  use PDOException;
 
@@ -15,6 +16,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
     public function getCategories()
     {
+       
         $stmt = $this->conn->prepare("SELECT * from  categories");
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,5 +70,14 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     
     return $data['cat_count'];
+}
+
+public function getlastCategories()
+{
+   
+    $stmt = $this->conn->prepare("SELECT *,id from  categories ORDER BY id LIMIT 3 ");
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 }
