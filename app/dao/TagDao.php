@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     public function getTagsById($id){
         $stmt = $this->conn->prepare("SELECT * from tags where id =?");
         $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_OBJ);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
 

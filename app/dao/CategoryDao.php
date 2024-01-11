@@ -25,7 +25,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     public function getCategoryById($id){
         $stmt = $this->conn->prepare("SELECT * from categories where id =?");
         $stmt->execute([$id]);
-        $row = $stmt->fetch(PDO::FETCH_OBJ);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
 

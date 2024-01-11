@@ -19,6 +19,7 @@ $router->setRoutes([
         'addCat'=>['HomeController','addCat'],
         'addTag'=>['HomeController','addTag'],
         'updateCat'=>['CategoryController','getCat'],
+        'updateTag'=>['TagController','getTag'],
         'tag'=>['TagController' , 'getAllTags'],
         'deleteTag'=>['TagController' , 'deleteTag'],
         'dashboard'=>['UserController' , 'getAllUsers'],
@@ -34,6 +35,7 @@ $router->setRoutes([
         'login'=>['UserController' , 'login'],
         'addCat'=>['CategoryController','addCategory'],
         'updateCat'=>['CategoryController','updateCateg'],
+        'updateTag'=>['TagController','updateTags'],
         'addTag'=>['TagController','addTag'],
         'addwiki'=>['WikiController','addwiki'],
 

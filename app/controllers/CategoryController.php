@@ -45,24 +45,20 @@ class CategoryController{
     {
         $id = $_GET['id'];
         $category = new CategoryDao();
-        $cats = $category->getCategories();
-        $oneCategory = $category->getCategoryById($id);
+        $Categories= $category->getCategoryById($id);
         require_once '../../views/admin/category/update.php';
     }
 
     // }
     public function updateCateg(){
-        if(isset($_POST['updatecategory'])){
         $postData = $_POST ;
         $catName = $postData['categoryName'];
         $catId = $postData['id'];
-
         $cat = new CategoryDao();
-
         $result = $cat->updateCategory($catId,$catName);
             header('location: category');
         
-    } }
+     }
     
 
 

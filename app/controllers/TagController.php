@@ -17,10 +17,16 @@ class TagController{
             $result = $tagdao->addTag( $tag);
                 header('location: tag');
 
-
-        
-
     }
+      
+    public function getTag()
+    {
+            $tagId = $_GET['id'];
+            $tagdao = new TagDao();
+             $tag=$tagdao-> getTagsById($tagId);
+             include __DIR__ . '../../../views/admin/tag/update.php';
+            }
+
     public function getAllTags() {
         $tag= new TagDao();
         $tags = $tag->getTags();
@@ -39,6 +45,16 @@ class TagController{
     }
 }
     
+public function updateTags(){
+    $tagId=$_POST['id'];
+    $tagName=$_POST['tagName'];
+
+    $tag =new TagDao();
+    $result= $tag->updateTag($tagId, $tagName);
+    header('location: tag');
+
+
+}
 
 
 }

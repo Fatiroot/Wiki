@@ -129,11 +129,11 @@ $users = $user->getUserById($Id);
                 <h2>Update Category</h2>
                 <form method="post" action="updateCat">
                     <div class="mb-3">
-                        <input type="hidden" class="form-control" id="categoryId" name="id" required>
+                        <input type="hidden" class="form-control" id="categoryId" name="id" value="<?= $Categories['id'] ?>" required>
                         <label for="categoryName" class="form-label">Category Name</label>
-                        <input type="text" class="form-control" id="categoryName" name="categoryName" value="" required>
+                        <input type="text" class="form-control" id="categoryName" name="categoryName" value="<?= $Categories['name'] ?>" required>
                     </div>
-                    <button  name="updatecategory" class="btn btn-primary">
+                    <button type="submit" name="submit" class="btn btn-primary">
                         Update Category
                     </button>
                 </form>
