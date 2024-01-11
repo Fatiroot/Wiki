@@ -38,6 +38,7 @@ $router->setRoutes([
         'updateTag'=>['TagController','updateTags'],
         'addTag'=>['TagController','addTag'],
         'addwiki'=>['WikiController','addwiki'],
+        'updatestatut'=>['WikiController','updateWikiStatut'],
 
         
  

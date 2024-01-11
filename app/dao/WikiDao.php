@@ -13,7 +13,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     public function getWikis()
     {
         // $stmt = $this->conn->prepare("SELECT * from  wikis");
-        $stmt = $this->conn->prepare(" SELECT w.*,u.id, u.username, c.name 
+        $stmt = $this->conn->prepare(" SELECT w.*,w.id, u.username, c.name 
         FROM wikis AS w 
         INNER JOIN users AS u ON (u.id = w.user_id) 
         INNER JOIN categories AS c ON (c.id = w.categorie_id) ");
@@ -87,26 +87,47 @@ public  function deleteWiki($wikiId)
         echo "Error : " . $e->getMessage();
     } 
 }
-// public function updateWiki($wikiId, $image, $title, $content, $statut, $categoryId, $userId, $tags)
-// {
-//     try {
-//         $this->conn->beginTransaction();
+public function updateWiki($id, $image, $title, $content, $statut, $categoryId, $userId, $tags)
+{
+    try {
+        $this->conn->beginTransaction();
 
-//         $sql = "UPDATE `wikis` 
-//                 SET `image` = ?, `title` = ?, `content` = ?, `statut` = ?,  `category_id` = ?, `user_id` = ? 
-//                 WHERE `id` = ?";
+        $sql = "UPDATE `wikis` 
+                SET `image` = ?, `title` = ?, `centent` = ?, `statut` = ?,  `category_id` = ?, `user_id` = ? 
+                WHERE `id` = ?";
 
-//         $stmt = $this->conn->prepare($sql);
-//         $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId, $wikiId]);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$image, $title, $content, $statut, $categoryId, $userId, $id]);
+        $query = "DELETE FROM `tag_wiki` WHERE `wiki_id` = ?";
+        $stm = $this->conn->prepare($query);
+        $stm->execute([$id]);
 
-        
+        $sqlTagWiki = "INSERT INTO `tag_wiki` (`tag_id`, `wiki_id`) VALUES (?, ?)";
+        $stmtTagWiki = $this->conn->prepare($sqlTagWiki);
 
-//         $this->conn->commit();
+        foreach ($tags as $tagId) {
+            $resultTag = $stmtTagWiki->execute([$tagId, $id]);
+            if (!$resultTag) {
+                // Log or handle tag insertion failure
+                error_log("Tag insertion failed for tag ID: $tagId");
+            }
+        }
 
-//     } catch (\PDOException $e) {
-//         $this->conn->rollBack();
-//         echo "Error : " . $e->getMessage();
-//     } 
-    
-// }
+        $this->conn->commit();
+
+    } catch (\PDOException $e) {
+        $this->conn->rollBack();
+        echo "Error : " . $e->getMessage();
+    }
 }
+
+
+public function updateWikiStatut($wikiId, $newStatut) {
+ 
+        $sql = "UPDATE wikis SET statut = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$newStatut, $wikiId]);
+
+      
+    
+}}

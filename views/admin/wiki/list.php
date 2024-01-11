@@ -26,9 +26,12 @@ $users = $user->getUserById($Id);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Bootstrap Dashboard and Admin Template - ByteWebster</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="stylesheet" href="/wiki/app/routes/../../public/css/style.css">
   <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </head>
 <!-- bytewebster.com -->
 <!-- bytewebster.com -->
@@ -55,6 +58,7 @@ $users = $user->getUserById($Id);
                     <a href="#" id="sidebarAvatar" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar-parent-child">
                             <img alt="Image Placeholder" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar- rounded-circle">
+
                             <span class="avatar-child avatar-badge bg-success"></span>
                         </div>
                     </a>
@@ -143,38 +147,85 @@ $users = $user->getUserById($Id);
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($wikis  as $wiki) { ?>
-                                <tr>
-                                <td>
-                                <img class="img-fluid w-100" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
-                                    </td>
-                                    <td>
-                                        <span><?= $wiki['title']?></span>
-                                    </td>
-                                    
-                                    <td>
-                                        <span><?= $wiki['name']?></span>
-                                    </td>
-                                    <td>
-                                        <span><?= $wiki['statut']?></span>
-                                    </td>
-                                    <td>
-                                        <span><?= $wiki['name']?></span>
-                                    </td>
-                                    
-                                    <td>
+    <?php foreach ($wikis as $wiki) { ?>
+        <tr>
+            <td>
+                <img class="img-fluid w-50" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
+            </td>
+            <td>
+                <span><?= $wiki['title'] ?></span>
+            </td>
 
-                                        <span><?= $wiki['username']?></span>
-                                    </td>
-                                    <td >
-                                        <a href="updateCat?id=<?= $cat['id'] ?>" class="btn btn-sm btn-neutral">Update</a>
-                                        <a href="deleteCat?id=<?= $cat['id'] ?>" class="btn btn-sm btn-neutral">Delete</a>
-                                        
-                                    </td>
-                                </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+            <td>
+                <span><?= $wiki['creation_date'] ?></span>
+            </td>
+            <td>
+                <span><?= $wiki['statut'] ?></span>
+            </td>
+            <td>
+                <span><?= $wiki['name'] ?></span>
+            </td>
+
+            <td>
+                <span><?= $wiki['username'] ?></span>
+            </td>
+            <td>
+                <a href="wiki?id=<?= $wiki['id'] ?>" class="btn btn-sm btn-neutral" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">View Content</a>
+                <a href="wiki?id=<?= $wiki['id'] ?>" class="btn btn-sm btn-neutral"  class="btn btn-sm btn-neutral" data-bs-toggle="modal" data-bs-target="#updatestatut<?= $wiki['id'] ?>">change statut</a>
+            </td>
+        </tr>
+        <!-- Modal for each wiki -->
+        <div class="modal fade" id="viewContent<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Content</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <?= $wiki['centent'] ?>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .... -->
+        <!-- Modal for update statut wiki -->
+        <div class="modal fade" id="updatestatut<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="updatestatut" method="post">
+                    <div class="mb-3">
+                    <input type="hidden" name="id" value="<?= $wiki['id'] ?>">
+                        <label for="newStatut" class="form-label">New Statut</label>
+                        <input type="text" class="form-control" id="newStatut" name="newStatut" value="<?= $wiki['statut'] ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- ....... -->
+    <?php } ?>
+</tbody>
+</table>
+
+
+
+
+                        <!-- ......... -->
                     </div>
                 </div>
             </div>

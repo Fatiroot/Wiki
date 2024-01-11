@@ -14,7 +14,7 @@ class WikiController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
              $image = $_FILES['image']['name']; // Le fichier uploadé
              $temp_name=$_FILES['image']['tmp_name'];
-             $uploadDirectory = "/wiki/public/imgs/";
+             $uploadDirectory = "../../public/imgs/";
              $destination = $uploadDirectory . $image;
              move_uploaded_file($temp_name, $destination);
             $title = $_POST['title'];
@@ -43,17 +43,35 @@ class WikiController
 
     }
 
-    // public function update(){
-
-    //     $id=$_POST['id'];
-    //     $name=$_POST['name'];
+    //  public function updateWiki(){
+    //     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //         $image = $_FILES['image']['name']; // Le fichier uploadé
+    //         $temp_name=$_FILES['image']['tmp_name'];
+    //         $uploadDirectory = "../../public/imgs/";
+    //         $destination = $uploadDirectory . $image;
+    //         move_uploaded_file($temp_name, $destination);
+    //        $title = $_POST['title'];
+    //        $id = $_POST['id'];
+    //        $content = $_POST['content'];
+    //        $category =$_POST['categorie_id'];
+    //        $userId =$_SESSION['user_id']; 
+    //        $tag =$_POST['tag_id']; 
+    //        $statut=$_POST['newStatut'];
+           
+    //        $wikidao = new Wikidao();
+    //        $wikidao->updateWiki($id, $image, $title, $content, $statut, $category, $userId,$tag);
+           
+    //        header('location:wiki');
+    //    } else {
+    //        echo "Le formulaire n'a pas été soumis.";
+    //    }
+    //     $name=$_POST['newstatut'];
         
     //     $wikidao = new Wikidao();
-    //     $wiki = new Wiki($id,$name);
     //     $wikidao->update($wiki);
       
         
-    // }
+   // }
 
     public function deletewiki(){
         $id=$_GET["id"];
@@ -71,7 +89,15 @@ class WikiController
         header('location: homeauthor');
 
     }
-
+    public function updateWikiStatut() {
+        
+        $wikiId = $_POST['id'];
+        $newStatus = $_POST['newStatut'];
+        $wiki = new WikiDao();  
+        $wiki->updateWikiStatut($wikiId, $newStatus);
+            header('location: wiki');
+        
+}
     
 
 }
