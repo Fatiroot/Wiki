@@ -97,12 +97,12 @@ class UserController{
         exit();
     
 }
-public function getAllUsers() {
-    $user= new UserDao();
-    $Users = $user->getAllUsers();
-    include __DIR__ . '../../../views/admin/dashboard.php';
+// public function getAllUsers() {
+//     $user= new UserDao();
+//     $Users = $user->getAllUsers();
+//     header('location: dashboard');
 
-}
+// }
 
 public function deleteUser(){
     if(isset($_GET['id'])){
@@ -114,5 +114,13 @@ public function deleteUser(){
         
 }
 } 
+
+public function countUsers() {
+     $user =new  UserDao();
+     $userCount= $user->countUsers();
+     return[ $userCount];
+     
+}
+
 
 }

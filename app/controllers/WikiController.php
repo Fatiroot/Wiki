@@ -98,7 +98,12 @@ class WikiController
             header('location: wiki');
         
 }
+public function countWikis() {
+    $wiki =new  WikiDao();
+    $wikiCount= $wiki->countWikis();
+    return[ $wikiCount];
     
+} 
 
 }
 ?>

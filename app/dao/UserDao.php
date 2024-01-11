@@ -78,5 +78,15 @@ class UserDao
         $stmt = $this->conn->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
+    
     }
+
+    public function countUsers() {
+            $query = "SELECT COUNT(*) as user_count FROM users";
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            return $data['user_count'];
+}
 }

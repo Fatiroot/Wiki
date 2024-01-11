@@ -133,7 +133,7 @@ $users = $user->getUserById($Id);
                                 <div class="row">
                                     <div class="col">
                                         <span class="h6 font-semibold text-muted text-sm d-block mb-2">Tags</span>
-                                        <span class="h3 font-bold mb-0">$11590.90</span>
+                                        <span class="h3 font-bold mb-0"><?php echo $tagCount; ?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
@@ -153,7 +153,7 @@ $users = $user->getUserById($Id);
                                 <div class="row">
                                     <div class="col">
                                         <span class="h6 font-semibold text-muted text-sm d-block mb-2">Users</span>
-                                        <span class="h3 font-bold mb-0">320</span>
+                                        <span class="h3 font-bold mb-0"><?php echo $userCount; ?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-primary text-white text-lg rounded-circle">
@@ -172,7 +172,7 @@ $users = $user->getUserById($Id);
                                 <div class="row">
                                     <div class="col">
                                         <span class="h6 font-semibold text-muted text-sm d-block mb-2">Categories</span>
-                                        <span class="h3 font-bold mb-0">4.100</span>
+                                        <span class="h3 font-bold mb-0"><?php echo $catCount; ?></span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-info text-white text-lg rounded-circle">
@@ -182,6 +182,26 @@ $users = $user->getUserById($Id);
                                 </div>
                                 <div class="mt-2 mb-0 text-sm">
                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 col-12">
+                        <div class="card shadow border-0">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Wikis</span>
+                                        <span class="h3 font-bold mb-0"><?php echo $wikiCount; ?></span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
+                                            <i class="bi bi-credit-card"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2 mb-0 text-sm">
+
+                                </div>
                             </div>
                         </div>
                     </div>

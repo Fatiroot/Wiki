@@ -130,4 +130,14 @@ public function updateWikiStatut($wikiId, $newStatut) {
 
       
     
-}}
+}
+public function countWikis() {
+    $query = "SELECT COUNT(*) as wiki_count FROM wikis";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $data['wiki_count'];
+}
+
+}

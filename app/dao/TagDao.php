@@ -55,4 +55,12 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     
 
  }
+ public function countTags() {
+    $query = "SELECT COUNT(*) as tag_count FROM tags";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $data['tag_count'];
+}
 }

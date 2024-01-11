@@ -22,7 +22,7 @@ $router->setRoutes([
         'updateTag'=>['TagController','getTag'],
         'tag'=>['TagController' , 'getAllTags'],
         'deleteTag'=>['TagController' , 'deleteTag'],
-        'dashboard'=>['UserController' , 'getAllUsers'],
+        'dashboard'=>['HomeController' , 'dashboard'],
         'deleteUser'=>['UserController' , 'deleteUser'],
         'addwiki'=>['HomeController','addwiki'],
         'deletewiki'=>['WikiController' , 'deletewiki'],

@@ -61,4 +61,12 @@ require_once __DIR__ . '/../../vendor/autoload.php';
     
 
  }
+ public function countCategories() {
+    $query = "SELECT COUNT(*) as cat_count FROM categories";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $data['cat_count'];
+}
 }

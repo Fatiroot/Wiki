@@ -60,6 +60,11 @@ class CategoryController{
         
      }
     
-
+     public function countCategories() {
+        $cat =new  CategoryDao();
+        $catCount= $cat->countcategories();
+        return[ $catCount];
+        
+   }
 
 }

@@ -55,6 +55,11 @@ public function updateTags(){
 
 
 }
-
+public function countTags() {
+    $tag =new  TagDao();
+    $tagCount= $tag->countTags();
+    return[ $tagCount];
+    
+}
 
 }
