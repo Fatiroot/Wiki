@@ -56,6 +56,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     <div>
         <button type="submit" name="add" class="btn btn-primary">Submit</button>
     </div>
+    <div><a href="homeauthor" class="btn btn-primary mt-3" >back</a></div>
 </form>
 
 
