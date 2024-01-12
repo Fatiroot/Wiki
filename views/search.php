@@ -1,4 +1,5 @@
-<?php foreach ($searchResults as $wiki) {
+
+<?php foreach ( $wikies as $wiki) {
     if ($wiki['statut'] === 0) { ?>
         <div class="container wiki-container">
             <div class="row">

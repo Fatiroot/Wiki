@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 require_once __DIR__ . '/../../vendor/autoload.php';
+
+use app\dao\CategoryDao;
 use app\Models\Wiki;
 use app\dao\WikiDao;
 
@@ -98,25 +100,17 @@ public function countWikis() {
     return[ $wikiCount];
     
 } 
+public static function search()
+{
 
-public function search() {
-    if (isset($_GET['search'])) {
+    if (isset($_GET["search"])) {
         $searchTerm = $_GET['search'];
         $wiki = new WikiDao();
-        $searchResults = $wiki->searchByName($searchTerm);
-       if($searchResults){
-        include_once '../app/View/search.php';
-        exit(); 
+        $searchResults = $wiki->search($searchTerm);
+        echo json_encode($searchResults);
     }
-        
-  }
 }
-
-// public function getlastWikis(){
-//     $wikidao = new Wikidao();
-//     $wikis= $wikidao->getlastWikis();
-//     header('location: index');
-
-// }
+ 
+    
 }
 ?>

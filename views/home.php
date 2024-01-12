@@ -111,10 +111,17 @@
             <h1 class="text-primary mb-4">Wiki</h1>
             <div class="mx-auto" style="width: 100%; max-width: 600px;">
                 <div class="input-group">
-                    <input type="search" class="form-control border-light" id="searchInput" onkeyup="search()" style="padding: 30px;" placeholder="search">
+                    <input type="search" class="form-control border-light" id="searchInput"  style="padding: 30px;" placeholder="search">
                     <div class="input-group-append">
                         <button class="btn btn-primary px-3">Recher</button>
                     </div>
+                    <!-- <select class="bg-primary px-3" name="category" id="select-search">
+                    <option value="wikis.title">Title</option>
+                    <option value="tags.name">Tag</option>
+                    <option value="categories.name">Category</option>
+                    </select>
+                    <input type="text" name="input-search"  style="padding: 30px;" id="input-search" class="form-control border-light ml-5" placeholder="Search what you want here "> -->
+
                 </div>
             </div>
         </div>
@@ -122,7 +129,7 @@
     <!-- Header End -->
 <!-- Features Start -->
 <h3 class="text-center">Last Wikis</h3>
-<div id="wikiforuser">
+<div id="card">
 <?php foreach ($wikis as $wiki) { 
     if ($wiki['statut'] === 0) { ?>
         <div class="container wiki-container ">
@@ -255,21 +262,71 @@
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
    <script>
-    function search() {
-               
-               let input = document.getElementById("searchInput").value;
-               let url = `search?search=${encodeURIComponent(input)}`;
+document.getElementById('searchInput').addEventListener('input', async function() {
+    try {
+        const query = this.value;
+        const response = await fetch('search?search=' + encodeURIComponent(query));
 
-               let xml = new XMLHttpRequest();
-               xml.onreadystatechange = function () {
-                   if (this.readyState == 4 && this.status == 200) {
-                       document.getElementById("wikisforuser").innerHTML = xml.responseText;
-                   }
-               };
-               xml.open("GET", url, true);
-               xml.send();
-         
-       }
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            // Clear the existing content in the card container
+            var cardContainer = document.getElementById("card");
+            cardContainer.innerHTML = "";
+
+            data.forEach(wiki => {
+                // Create and append new wiki card elements to the card container
+                if (wiki.statut === 0) {
+                    const wikiContainer = document.createElement("div");
+                    wikiContainer.classList.add("container", "wiki-container");
+
+                    const wikiContent = `
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <img class="img-fluid wiki-image" src="/wiki/public/imgs/${wiki.image}" alt="Wiki Image">
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="wiki-content">
+                                    <h1 class="wiki-title">${wiki.title}</h1>
+                                    <ul class="wiki-details">
+                                        <li><h6>${wiki.name}</h6></li>
+                                        <li><h6>${wiki.username}</h6></li>
+                                        <li class="date">${wiki.creation_date}</li>
+                                    </ul>
+                                    <a href="index?id=${wiki.id}" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent${wiki.id}">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal for each wiki -->
+                        <div class="modal fade" id="viewContent${wiki.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Content</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ${wiki.content}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+
+                    wikiContainer.innerHTML = wikiContent;
+                    cardContainer.appendChild(wikiContainer);
+                }
+            });
+        }
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+          
    </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

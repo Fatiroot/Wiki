@@ -153,12 +153,16 @@ public function getlastWikis()
     return $result;
 }
 
-public function searchByName($searchTerm) {
-    $sql = "SELECT * FROM `wikis` WHERE `title` LIKE ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->execute(["%$searchTerm%"]);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $result;
+public function search($query) {
+    $sql = "SELECT w.*, c.name as category_name
+        FROM `wikis` w
+        JOIN `categories` c ON w.categorie_id = c.id
+        WHERE w.title LIKE :query OR c.name LIKE :query";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['query' => '%' . $query . '%']);
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $result;
+    
     
 }
 
