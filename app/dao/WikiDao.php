@@ -93,7 +93,7 @@ public function updateWiki($id, $image, $title, $content, $statut, $categoryId, 
         $this->conn->beginTransaction();
 
         $sql = "UPDATE `wikis` 
-                SET `image` = ?, `title` = ?, `centent` = ?, `statut` = ?,  `category_id` = ?, `user_id` = ? 
+                SET `image` = ?, `title` = ?, `centent` = ?, `statut` = ?,  `categorie_id` = ?, `user_id` = ? 
                 WHERE `id` = ?";
 
         $stmt = $this->conn->prepare($sql);
@@ -151,6 +151,15 @@ public function getlastWikis()
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $result;
+}
+
+public function searchByName($searchTerm) {
+    $sql = "SELECT * FROM `wikis` WHERE `title` LIKE ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute(["%$searchTerm%"]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+    
 }
 
 }

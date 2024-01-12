@@ -15,17 +15,18 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>add wiki</title>
+    <title>update wiki</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
     <script src="https://cdn.tiny.cloud/1/k5wu5iubgom98npjv1612l28685z6zxa8348t42bnvfq28w2/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
 
-<form action="updateWiki" method="post" enctype="multipart/form-data" class="mt-4">
+<form action="updatewiki" method="post" enctype="multipart/form-data" class="mt-4">
     <div class="mb-3">
+    <input type="hidden" class="form-control" id="categoryId" name="id" value="<?= $Wikis['id'] ?>" required>
         <label for="image" class="form-label" >Image:</label>
-        <input type="file" class="form-control"  value="<?=  $Wikis['image'] ?>" id="image" name="image" accept="image/*" ">
+        <input type="file" class="form-control"  id="image" name="image" accept="image/*" >
     </div>
     <div class="mb-3">
         <label for="title" class="form-label" >Title:</label>
@@ -33,10 +34,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     </div>
     <div class="mb-3">
         <label for="content" class="form-label" >Content:</label>
-        <textarea class="form-control" id="content" name="content" value="<?=  $Wikis['centent'] ?>" placeholder="Content"></textarea>
+        <textarea class="form-control" id="content" name="content"  placeholder="Content"><?=  $Wikis['centent'] ?></textarea>
     </div>
     <div class="mb-3">
-        <label for="category" class="form-label" value="<?= $wikis['categorie_id'] ?>">Category:</label>
+        <label for="category" class="form-label">Category:</label>
         <select id="category" name="categorie_id" >
             <?php foreach ($Categories as $cat) { ?>
                 <option value="<?= $cat['id'] ?>" ><?= $cat['name'] ?></option>
@@ -54,7 +55,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 
     <!-- Other fields and tags inputs go here -->
     <div>
-        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="updatewiki" class="btn btn-primary">Submit</button>
     </div>
 </form>
 

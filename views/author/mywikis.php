@@ -141,7 +141,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
 
     <!-- Header End -->
     <!-- Features Start -->
-<h3 class="text-center">Last Wikis</h3>
+<h3 class="text-center">My Wikis</h3>
 <?php foreach ($wikis as $wiki) { 
         if($_SESSION['user_id']===$wiki['user_id'] && $wiki['statut']===0 ){?>
             <div class="container wiki-container">

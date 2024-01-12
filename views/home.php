@@ -111,7 +111,7 @@
             <h1 class="text-primary mb-4">Wiki</h1>
             <div class="mx-auto" style="width: 100%; max-width: 600px;">
                 <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Enter">
+                    <input type="search" class="form-control border-light" id="searchInput" onkeyup="search()" style="padding: 30px;" placeholder="search">
                     <div class="input-group-append">
                         <button class="btn btn-primary px-3">Recher</button>
                     </div>
@@ -122,9 +122,10 @@
     <!-- Header End -->
 <!-- Features Start -->
 <h3 class="text-center">Last Wikis</h3>
+<div id="wikiforuser">
 <?php foreach ($wikis as $wiki) { 
     if ($wiki['statut'] === 0) { ?>
-        <div class="container wiki-container">
+        <div class="container wiki-container ">
             <div class="row">
                 <div class="col-lg-5">
                     <img class="img-fluid wiki-image" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
@@ -160,6 +161,7 @@
             </div>
         </div>
 <?php }} ?>
+</div>
 <h3 class="text-center mt-5">Last Categories</h3>
 
 <?php foreach ($categories as $cat) { ?>
@@ -252,7 +254,23 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
+   <script>
+    function search() {
+               
+               let input = document.getElementById("searchInput").value;
+               let url = `search?search=${encodeURIComponent(input)}`;
 
+               let xml = new XMLHttpRequest();
+               xml.onreadystatechange = function () {
+                   if (this.readyState == 4 && this.status == 200) {
+                       document.getElementById("wikisforuser").innerHTML = xml.responseText;
+                   }
+               };
+               xml.open("GET", url, true);
+               xml.send();
+         
+       }
+   </script>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

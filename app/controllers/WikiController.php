@@ -29,9 +29,7 @@ class WikiController
             //  var_dump($title, $content, $statut, $category, $userId, $tag);
             //  die();
             header('location:homeauthor');
-        } else {
-            echo "Le formulaire n'a pas été soumis.";
-        }
+        } 
            
         
     }
@@ -44,6 +42,7 @@ class WikiController
     }
 
      public function updateWiki(){
+       session_start();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $image = $_FILES['image']['name']; 
             $temp_name=$_FILES['image']['tmp_name'];
@@ -56,15 +55,14 @@ class WikiController
            $category =$_POST['categorie_id'];
            $userId =$_SESSION['user_id']; 
            $tag =$_POST['tag_id']; 
-           $statut=$_POST['newStatut'];
+           $statut=0;
            
            $wikidao = new Wikidao();
            $wikidao->updateWiki($id, $image, $title, $content, $statut, $category, $userId,$tag);
-           
-           header('location: homeauthor');
-       } else {
-           echo "Le formulaire n'a pas été soumis.";
-       }        
+        //    var_dump($id, $image, $title, $content, $statut, $category, $userId,$tag);
+        //    die();
+           header('location:homeauthor');
+       }      
       
         
    }
@@ -100,6 +98,19 @@ public function countWikis() {
     return[ $wikiCount];
     
 } 
+
+public function search() {
+    if (isset($_GET['search'])) {
+        $searchTerm = $_GET['search'];
+        $wiki = new WikiDao();
+        $searchResults = $wiki->searchByName($searchTerm);
+       if($searchResults){
+        include_once '../app/View/search.php';
+        exit(); 
+    }
+        
+  }
+}
 
 // public function getlastWikis(){
 //     $wikidao = new Wikidao();

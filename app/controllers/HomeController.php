@@ -94,10 +94,10 @@ public function index(){
         $id = $_GET['id'];
         $wiki = new WikiDao();
         $Wikis= $wiki->getWikisById($id);
-        // $categoryController = new CategoryController();
-        // $categories = $categoryController->getAllCategories();
-        // $tagController = new TagController();
-        // $tags = $tagController->getAllTags();
+        $category= new CategoryDao();
+        $Categories = $category->getCategories();
+        $tag= new TagDao();
+        $tags = $tag->getTags();
         // print_r($Wikis);
         // exit();
        
