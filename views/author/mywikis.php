@@ -157,26 +157,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
                             <li><h6><?= $wiki['username'] ?></h6></li>
                             <li class="date"><?= $wiki['creation_date']; ?></li>
                         </ul>
-                        <a href="homeauthor?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">Learn More</a>
+                        <a href="details-wiki?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" >Learn More</a>
                         <a href="deletewiki?id=<?=$wiki['id']?>" class="btn btn-danger mt-3 ml-2">Delete</a>
                         <a href="updatewiki?id=<?=$wiki['id']?>" class="btn btn-danger mt-3 ml-2">Update</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-         <!-- Modal for each wiki -->
-         <div class="modal fade" id="viewContent<?= $wiki['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Content</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <?= $wiki['centent'] ?>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

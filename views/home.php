@@ -145,7 +145,7 @@
                             <li><h6><?= $wiki['username'] ?></h6></li>
                             <li class="date"><?= $wiki['creation_date']; ?></li>
                         </ul>
-                        <a href="index?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent<?= $wiki['id'] ?>">Learn More</a>
+                        <a href="detailswiki?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -294,27 +294,11 @@ document.getElementById('searchInput').addEventListener('input', async function(
                                         <li><h6>${wiki.username}</h6></li>
                                         <li class="date">${wiki.creation_date}</li>
                                     </ul>
-                                    <a href="index?id=${wiki.id}" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#viewContent${wiki.id}">Learn More</a>
+                                    <a href="detailswiki?id=${wiki.id}" class="btn btn-primary mt-3" >Learn More</a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal for each wiki -->
-                        <div class="modal fade" id="viewContent${wiki.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Content</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ${wiki.content}
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
+                        `;
 
                     wikiContainer.innerHTML = wikiContent;
                     cardContainer.appendChild(wikiContainer);

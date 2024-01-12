@@ -29,6 +29,10 @@ $router->setRoutes([
         'deletewiki'=>['WikiController' , 'deletewiki'],
         'updatewiki'=>['HomeController','updateWiki'],
         'search'=>['WikiController','search'],
+        'details-wiki' => ['WikiController', 'getwikidetail'],
+        'detailswiki' => ['WikiController', 'getdetailswiki'],
+
+
 
         
 

@@ -85,6 +85,24 @@ class WikiController
         header('location: homeauthor');
 
     }
+    
+    public function getwikidetail()
+    {
+        $idwiki=$_GET['id'];
+        $wikidao = new Wikidao();
+        $wikis = $wikidao->getWikisById($idwiki);
+        require_once '../../views/author/detail.php';
+
+    }
+
+    public function getdetailswiki()
+    {
+        $idwiki=$_GET['id'];
+        $wikidao = new Wikidao();
+        $wikis = $wikidao->getWikisById($idwiki);
+        require_once '../../views/detailwiki.php';
+
+    }
     public function updateWikiStatut() {
         
         $wikiId = $_POST['id'];

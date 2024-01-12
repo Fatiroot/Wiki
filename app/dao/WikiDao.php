@@ -25,7 +25,10 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
     
     public function getWikisById($id){
-        $stmt = $this->conn->prepare("SELECT * FROM wikis where id = ?");
+        $stmt = $this->conn->prepare(" SELECT w.*,w.id, u.username, c.name 
+        FROM wikis AS w 
+        INNER JOIN users AS u ON (u.id = w.user_id) 
+        INNER JOIN categories AS c ON (c.id = w.categorie_id) where w.id = ?");
         $stmt->execute([$id]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         return $row;

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
  session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     header('Location: login');
@@ -106,9 +106,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
             </button>
             <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav m-auto py-0">
-                    <a href="home" class="nav-item nav-link active">Home</a>
-                    <a href="homeauthor" class="nav-item nav-link">my wikis</a>
-                    <a href="index" class="nav-item nav-link">log out</a>
+                <a href="index" class="nav-item nav-link active">Home</a>
+                    <a href="login" class="nav-item nav-link">add wiki</a>
+                    <a href="#" class="nav-item nav-link">Service</a>
+                    <a href="register" class="nav-item nav-link">get started</a>
                 </div>
             </div>
         </nav>
@@ -133,36 +134,31 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role_id'] != 2) {
     <!-- Header End -->
    <!-- Features Start -->
 <h3 class="text-center">Last Wikis</h3>
-<?php foreach ($wikis as $wiki) { 
-    if ($wiki['statut'] === 0) { ?>
+<?php 
+    if ($wikis['statut'] === 0)  ?>
         <div class="container wiki-container">
             <div class="row">
                 <div class="col-lg-5">
-                    <img class="img-fluid wiki-image" src="/wiki/public/imgs/<?= $wiki['image'] ?>" alt="Wiki Image">
+                    <img class="img-fluid wiki-image" src="/wiki/public/imgs/<?= $wikis['image'] ?>" alt="Wiki Image">
                 </div>
                 <div class="col-lg-7">
                     <div class="wiki-content">
-                        <h1 class="wiki-title"><?= $wiki['title'] ?></h1>
+                        <h1 class="wiki-title"><?= $wikis['title'] ?></h1>
+                        <p class="wiki-content"><?= $wikis['centent'] ?></p>
                         <ul class="wiki-details">
-                            <li><h6><?= $wiki['name'] ?></h6></li>
-                            <li><h6><?= $wiki['username'] ?></h6></li>
-                            <li class="date"><?= $wiki['creation_date']; ?></li>
+                            
+                            <li><h6><?= $wikis['name'] ?></h6></li>
+                            <li><h6><?= $wikis['username'] ?></h6></li> 
+                            <li class="date"><?= $wikis['creation_date']; ?></li>
                         </ul>
-                        <a href="details-wiki?id=<?= $wiki['id'] ?>" class="btn btn-primary mt-3" >Learn More</a>
+                        <a href="index" class="btn btn-primary mt-3" >back</a>
                     </div>
                 </div>
             </div>
         </div>
-<?php }} ?>
-<h3 class="text-center mt-5">Last Categories</h3>
+      
 
-<?php foreach ($categories as $cat) { ?>
-    <div class="container my-3">
-        <div class="alert alert-info" role="alert">
-            <?php echo $cat['name']; ?>
-        </div>
-    </div>
-<?php } ?>
+
 <!-- Features End -->
 
 
